@@ -20,9 +20,13 @@ namespace NeonLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string VersionString = "v0.0.1 ALPHA";
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Title = Title.Replace("{{VERSION}}", VersionString);
         }
     }
 }
