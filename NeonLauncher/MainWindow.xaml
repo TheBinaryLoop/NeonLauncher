@@ -4,13 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeonLauncher"
+        xmlns:converter="clr-namespace:NeonLauncher.Converter"
         mc:Ignorable="d"
-        Title="NeonLauncher {{VERSION}}" Height="450" Width="800" Background="#FF1D1D1D" Foreground="#FFB0B0B0">
+        Title="NeonLauncher {{VERSION}}" 
+        Height="450" 
+        Width="800" 
+        Background="#FF1D1D1D" 
+        Foreground="#FFB0B0B0">
+    <Window.Resources>
+        <converter:IconConverter x:Key="Conv" />
+    </Window.Resources>
     <Grid>
-        <ListView x:Name="ListViewGames" Background="#FF1D1D1D" Foreground="#FFB0B0B0">
-            <ListViewItem>
-                
-            </ListViewItem>
+        <Menu HorizontalAlignment="Left" 
+              Height="20" 
+              Margin="0,0,0,0" 
+              VerticalAlignment="Top" 
+              Width="792" 
+              Background="#FF1D1D1D" 
+              Foreground="#FFB0B0B0"/>
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  x:Name="ListViewGames" 
+                  Background="#FF1D1D1D" 
+                  Foreground="#FFB0B0B0" 
+                  Margin="0,20,0,0" 
+                  AllowDrop="True"
+                  Drop="OnDrop" 
+                  BorderThickness="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="{Binding Icon, Converter={StaticResource Conv}}" 
+                               Height="32" 
+                               Width="32"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Window>
